@@ -17,6 +17,7 @@ model Users {
   password          String  @unique
   lastAuthenticated String
   registeredAt      String
+  isOnline          Boolean
   saves             Saves[]
 }
 
@@ -48,4 +49,11 @@ model Saves {
   byValue          Int
   bySpeed          Int
   byFrequency      Int
+}
+
+model Log {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  message String
+  madeBy  String
+  madeAt  DateTime
 }
