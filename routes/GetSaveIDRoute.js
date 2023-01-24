@@ -8,7 +8,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 //ez a sor felett csak importok találhatóak.
 
 module.exports = app => {
-    app.post("/api/getsave", urlencodedParser, async (req, res) => {  //postot használunk mivel a kérés küldésekor a bodyban szeretnénk küldeni az adatokat.    
+    app.post("/api/getsaveid", urlencodedParser, async (req, res) => {  //postot használunk mivel a kérés küldésekor a bodyban szeretnénk küldeni az adatokat.    
         const bearerHeader = req.headers['authorization']
         const bearerToken = bearerHeader.split(' ')[1]
         const verified = jwt.verify(bearerToken, jwtKey);
@@ -20,6 +20,9 @@ module.exports = app => {
                     {
                         username: req.body.username
                     }
+                },
+                select: {
+                    id: true
                 }
             }) // keresünk egy mentést a bodyban kapott username alapján.
             //when someone register, we create a save data, so there is no need to check if there is a save with this username or not.
